@@ -31,16 +31,16 @@ Kullanılan kütüphaneler:
 - tkcalendar: tkinter ile uyumlu bir takvim widget'ı sağlar.
 
 ## Proje GUI özellikleri:
-- Giriş Yap Ekranı:
+1. Giriş Yap Ekranı:
   *Kullanıcı adı ve Şifre girilmesi istenip ardından Giriş Yap'a tıklanması gerekmektedir.
   *Eğer Kayıtlı kullanıcı değil ise Kayıt Ol ekranından kayıtlanma beklenmektedir.
 
-- Kayıt Ol Ekranı:
+2. Kayıt Ol Ekranı:
   *Ad, Soyad, Kullanıcı adı, Şifre, Kimlik numarası, Telefon numarası, Mail adresi, Adres bilgilerinin girilmesi beklenmektedir.
   *Kullanıcı tipi seçilmesi gerekmektedir. Kullanıcı tipleri Standart ve Admin olmak üzere 2 tiptir.
   *Kayıtlı kullanıcı bilgileri users.txt adlı text dosyasına kaydedilip orada tutulmaktadır.
 
-- Ana Ekran:
+3. Ana Ekran:
   *Olayların sıralandığı bir panel ile Olay Ekle, Olay Düzenle, Olay Sil, Çıkış Yap seçeneklerinden oluşmaktadır.
   *Olay Panelinde eklenen olaylara ait İşlem Zamanı, Olay Başlangıç Zamanı, Olay Tanımı, Olay Tipi, Olay Açıklaması gösterilmektedir.
   *Olay eklemek için Olay Ekle Ekranından bilgilerin girilmesi gerekmektedir.
@@ -48,7 +48,7 @@ Kullanılan kütüphaneler:
   *Olayları silmek için, silinmek istenen olay ekrandan seçilip Olay Sil tuşuna basılmalıdır.
   *Çıkış yapmak için ekrandaki Çıkış Yap tuşuna tıklanmalıdır. Çıkış Yap' tıklanıldıktan sonra program kapanmaktadır.
 
-- Olay Ekle:
+4. Olay Ekle:
   *İsteğe bağlı olarak Alarm Ayarla seçeneğinden olay zamanında hatırlatıcı olması için alarm eklenebilmektedir. Alarmın çalınması için zaman bilgileri Erken Alarm kısmına saniye cinsinden girilmelidir.
   *Olay Başlangıç zamanı ekrandaki takvimden seçilmelidir veya manuel olarak yazılmalıdır. Zaman Bilgileri ay/gün/yıl olarak girilmelidir.
   *Olay Saati saat:dakika olarak girilmelidir.
