@@ -4,7 +4,8 @@ from tkinter import messagebox
 from datetime import datetime
 from datetime import timedelta
 
-from playsound import playsound
+from pygame import mixer
+import time
 from tkcalendar import DateEntry
 import codecs
 import sys
@@ -68,7 +69,7 @@ def olay_ekle_ekran():
         olay_tipi = olay_tipi_field.get()
         olay_aciklamasi = olay_aciklamasi_field.get()
 
-        kullanici_adi = "Giriş yapmamış kullanıcı"
+        kullanici_adi = "userTemp"
 
         with open("olaylar.txt", "a", encoding="utf-8") as file:
             file.write(
@@ -101,7 +102,11 @@ def olay_ekle_ekran():
         bekleme_suresi = (alarm_zamani - simdi_zamani).total_seconds()
 
         def cal():
-            playsound(alarm_ses)
+            mixer.init()
+            mixer.music.load("alarm.mp3")
+            mixer.music.play()
+            while mixer.music.get_busy():
+                time.sleep(1)
 
         threading.Timer(bekleme_suresi, cal).start()
 
@@ -149,9 +154,14 @@ def olay_ekle_ekran():
 
 def olay_duzenle_ekran():
     selected_item = olaylar_table.focus()
+    selected_item_data = olaylar_table.item(selected_item)
     if selected_item:
         olay_duzenle_ekran = tk.Toplevel()
         olay_duzenle_ekran.title("Olay Düzenle")
+        selected_values = selected_item_data['values']
+
+        secilenSatir2 = f"userTemp;{selected_values[0]};{selected_values[1]};{selected_values[2]};{selected_values[3]};{selected_values[4]}\n"
+        print(secilenSatir2)
 
         def olay_duzenle():
             yeni_veri = []
@@ -161,10 +171,11 @@ def olay_duzenle_ekran():
             with open("olaylar.txt", "r") as file:
                 rows = file.readlines()
 
-            secilenSatir = f"{yeni_veri[0]};{yeni_veri[1]};{yeni_veri[2]};{yeni_veri[3]};{yeni_veri[4]};{yeni_veri[5]}\n"
+            secilenSatir = f"userTemp;{yeni_veri[0]};{yeni_veri[1]};{yeni_veri[2]};{yeni_veri[3]};{yeni_veri[4]}\n"
+            print(secilenSatir)
 
             for i, row in enumerate(rows):
-                if row.startswith(yeni_veri[0]):
+                if row.startswith(secilenSatir2):
                     rows[i] = secilenSatir
                     break
 
@@ -175,16 +186,9 @@ def olay_duzenle_ekran():
             verileri_yukle()
 
         selected_item_data = olaylar_table.item(selected_item)
-        kullanici_adi = selected_item_data['values'][0:]
         eski_veri = selected_item_data['values'][0:]
 
         entry_list = []
-        label = tk.Label(olay_duzenle_ekran, text="Kullanıcı Adı:")
-        label.pack()
-        entry_kullanici_adi = tk.Entry(olay_duzenle_ekran)
-        entry_kullanici_adi.insert(tk.END, kullanici_adi)
-        entry_kullanici_adi.pack()
-        entry_list.append(entry_kullanici_adi)
 
         for i, veri in enumerate(eski_veri):
             label = tk.Label(olay_duzenle_ekran, text=f"Veri {i+1}:")
